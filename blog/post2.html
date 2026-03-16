@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tips for Responsive Web Design - Blog</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">Portfolio</div>
+                <div class="nav-actions">
+                    <a href="../index.html#blog" class="back-button"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Blog Post -->
+    <article class="blog-post">
+        <div class="container">
+            <header class="post-header">
+                <h1>Tips for Responsive Web Design</h1>
+                <div class="post-meta">
+                    <span class="author">By Your Name</span>
+                    <span class="date">March 10, 2026</span>
+                    <span class="read-time">6 min read</span>
+                </div>
+                <img src="../images/blog2.jpg" alt="Blog Post Image" class="post-image">
+            </header>
+
+            <div class="post-content">
+                <p>In today's digital landscape, responsive web design isn't optional—it's essential. With users accessing websites from various devices, sizes, and orientations, ensuring your website looks and functions perfectly everywhere is crucial.</p>
+
+                <h2>What is Responsive Web Design?</h2>
+                <p>Responsive web design is an approach to web development that makes web pages render well on different screen sizes and orientations. It's about creating a fluid, flexible experience across all devices.</p>
+
+                <h2>The Mobile-First Approach</h2>
+                <p>Always start designing for mobile devices first, then progressively enhance the design for larger screens. This approach ensures your site is accessible to everyone, including the growing number of mobile users.</p>
+
+                <h2>Essential Techniques</h2>
+
+                <h3>1. Use Flexible Grids</h3>
+                <p>Instead of fixed pixel widths, use percentages and flexible grid systems like CSS Grid or Flexbox. This allows your layout to adapt to any screen size.</p>
+
+                <h3>2. Implement Media Queries</h3>
+                <p>Media queries let you apply different styles based on device characteristics like screen width, height, and orientation. They're the backbone of responsive design.</p>
+
+                <h3>3. Optimize Images</h3>
+                <p>Use responsive images with srcset and sizes attributes. Consider modern formats like WebP and always optimize file sizes. Large images can slow down mobile devices significantly.</p>
+
+                <h3>4. Set Viewport Meta Tag</h3>
+                <p>Always include the viewport meta tag in your HTML head to instruct browsers how to handle page dimensions and scaling.</p>
+
+                <h2>Common Breakpoints</h2>
+                <p>Here are standard breakpoints to consider:</p>
+                <ul>
+                    <li><strong>Mobile:</strong> 320px - 480px</li>
+                    <li><strong>Tablet:</strong> 481px - 768px</li>
+                    <li><strong>Desktop:</strong> 769px - 1024px</li>
+                    <li><strong>Large Desktop:</strong> 1025px and above</li>
+                </ul>
+
+                <h2>Best Practices</h2>
+                <ul>
+                    <li>Test your designs on real devices, not just Chrome DevTools</li>
+                    <li>Ensure touch targets are large enough (at least 44x44 pixels)</li>
+                    <li>Use relative units (rem, em, %) instead of fixed pixels</li>
+                    <li>Consider performance on slower mobile networks</li>
+                    <li>Make fonts readable on small screens</li>
+                    <li>Avoid horizontal scrolling</li>
+                </ul>
+
+                <h2>Tools for Testing</h2>
+                <p>Use these tools to test responsive design:</p>
+                <ul>
+                    <li>Chrome DevTools (F12)</li>
+                    <li>BrowserStack for real device testing</li>
+                    <li>Responsively App for quick previews</li>
+                    <li>Google's Mobile-Friendly Test</li>
+                </ul>
+
+                <h2>Performance Considerations</h2>
+                <p>Responsive doesn't mean everything loads on every device. Implement:</p>
+                <ul>
+                    <li>Lazy loading for images</li>
+                    <li>Conditional JavaScript loading</li>
+                    <li>CSS and JavaScript minification</li>
+                    <li>Compression and caching strategies</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>Responsive web design is not a trend—it's the standard. By following these principles and best practices, you'll create websites that provide excellent user experiences across all devices.</p>
+
+                <p>Remember, responsive design is not just about appearance; it's about accessibility and usability for everyone, regardless of how they access your site.</p>
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-tags">
+                    <a href="#">#responsive</a>
+                    <a href="#">#design</a>
+                    <a href="#">#webdevelopment</a>
+                </div>
+                <a href="../index.html#blog" class="back-link">← Back to Blog</a>
+            </footer>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Your Name. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .blog-post {
+            padding: 60px 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+        }
+
+        .post-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .post-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .post-meta span::after {
+            content: '•';
+            margin-left: 1rem;
+        }
+
+        .post-meta span:last-child::after {
+            content: '';
+        }
+
+        .post-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-bottom: 3rem;
+        }
+
+        .post-content h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content ul,
+        .post-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .post-tags a {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .back-link {
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .post-footer {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .post-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with Web Development - Blog</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">Portfolio</div>
+                <div class="nav-actions">
+                    <a href="../index.html#blog" class="back-button"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Blog Post -->
+    <article class="blog-post">
+        <div class="container">
+            <header class="post-header">
+                <h1>Getting Started with Web Development</h1>
+                <div class="post-meta">
+                    <span class="author">By Your Name</span>
+                    <span class="date">March 16, 2026</span>
+                    <span class="read-time">5 min read</span>
+                </div>
+                <img src="../images/blog1.jpg" alt="Blog Post Image" class="post-image">
+            </header>
+
+            <div class="post-content">
+                <p>Web development is one of the most exciting and rewarding career paths in technology today. Whether you're looking to build a career or create amazing projects, this guide will help you get started on the right foot.</p>
+
+                <h2>Why Learn Web Development?</h2>
+                <p>Web development offers numerous opportunities for creative individuals and technical problem-solvers. Here are some compelling reasons to get started:</p>
+                <ul>
+                    <li>High demand in the job market</li>
+                    <li>Flexibility to work remotely</li>
+                    <li>Ability to build and launch your own projects</li>
+                    <li>Continuous learning opportunities</li>
+                </ul>
+
+                <h2>The Fundamentals: HTML, CSS, and JavaScript</h2>
+                <p>Every web developer should start with the basics - the holy trinity of web development:</p>
+                
+                <h3>HTML (HyperText Markup Language)</h3>
+                <p>HTML is the foundation of all web pages. It provides the structure and content. Think of it as the skeleton of a web page.</p>
+
+                <h3>CSS (Cascading Style Sheets)</h3>
+                <p>CSS is responsible for the visual presentation. It makes HTML look beautiful by controlling colors, layouts, fonts, and more. It's the skin and clothes of your web page.</p>
+
+                <h3>JavaScript</h3>
+                <p>JavaScript brings interactivity to web pages. It handles user interactions and dynamic content. It's the brain of web development.</p>
+
+                <h2>Your Learning Path</h2>
+                <p>Here's a recommended path for beginners:</p>
+                <ol>
+                    <li>Start with HTML basics and semantic markup</li>
+                    <li>Learn CSS and responsive design</li>
+                    <li>Master JavaScript fundamentals</li>
+                    <li>Build projects to reinforce learning</li>
+                    <li>Learn a framework (React, Vue, or Angular)</li>
+                    <li>Explore backend development</li>
+                </ol>
+
+                <h2>Tips for Success</h2>
+                <p>Remember these key points as you embark on your web development journey:</p>
+                <ul>
+                    <li><strong>Practice regularly:</strong> Code every day to build muscle memory</li>
+                    <li><strong>Build projects:</strong> Real projects are the best way to learn</li>
+                    <li><strong>Read documentation:</strong> Get comfortable with official docs</li>
+                    <li><strong>Join communities:</strong> Connect with other developers</li>
+                    <li><strong>Stay curious:</strong> Web development is always evolving</li>
+                </ul>
+
+                <h2>Getting Started Today</h2>
+                <p>You don't need anything fancy to get started. Just:</p>
+                <ul>
+                    <li>A computer</li>
+                    <li>A text editor (VS Code is recommended)</li>
+                    <li>A web browser</li>
+                    <li>A passion for learning</li>
+                </ul>
+
+                <p>The web development community is welcoming and supportive. Don't hesitate to ask questions, join forums, and engage with other learners and professionals.</p>
+
+                <p><strong>Happy coding!</strong></p>
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-tags">
+                    <a href="#">#webdevelopment</a>
+                    <a href="#">#beginners</a>
+                    <a href="#">#tutorial</a>
+                </div>
+                <a href="../index.html#blog" class="back-link">← Back to Blog</a>
+            </footer>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Your Name. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .blog-post {
+            padding: 60px 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+        }
+
+        .post-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .post-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .post-meta span::after {
+            content: '•';
+            margin-left: 1rem;
+        }
+
+        .post-meta span:last-child::after {
+            content: '';
+        }
+
+        .post-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-bottom: 3rem;
+        }
+
+        .post-content h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content ul,
+        .post-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .post-tags a {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .back-link {
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .post-footer {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .post-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <script src="../script.js"></script>
+</body>
+</html>

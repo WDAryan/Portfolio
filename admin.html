@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 20px;
+        }
+
+        .admin-header {
+            display: none;
+        }
+
+        .admin-logout-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .admin-logout-btn:hover {
+            background-color: white;
+            color: #00a8ff;
+        }
+
+        .back-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid white;
+        }
+
+        .back-button:hover {
+            background-color: white;
+            color: #00a8ff;
+        }
+
+        .back-button i {
+            font-size: 1rem;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .admin-tab {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .admin-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .admin-tab:hover {
+            color: var(--primary-color);
+        }
+
+        .admin-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-add {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .btn-add:hover {
+            background-color: #0088cc;
+        }
+
+        .items-list {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .item-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .item-content h4 {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .item-content p {
+            margin: 0.25rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+
+        .btn-delete {
+            background-color: #ff4757;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #ee5a6f;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .item-card {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">Admin Dashboard</div>
+                <div class="nav-actions">
+                    <a href="index.html" class="back-button admin-back-btn"><i class="fas fa-home"></i> Home</a>
+                    <button id="adminLogoutBtn" class="admin-toggle" onclick="adminLogout()" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="admin-container">
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="switchTab('hero')">Hero</button>
+            <button class="admin-tab" onclick="switchTab('about')">About</button>
+            <button class="admin-tab" onclick="switchTab('skills')">Skills</button>
+            <button class="admin-tab" onclick="switchTab('projects')">Projects</button>
+            <button class="admin-tab" onclick="switchTab('blog')">Blog</button>
+            <button class="admin-tab" onclick="switchTab('certifications')">Certificates</button>
+        </div>
+
+        <div class="admin-content">
+            <!-- Hero Tab -->
+            <div id="hero" class="tab-content active">
+                <div class="form-section">
+                    <h3>Edit Hero Section</h3>
+                    <div class="form-group">
+                        <label>Main Title</label>
+                        <input type="text" id="heroTitle" placeholder="Hi, I'm Aryan Raj">
+                    </div>
+                    <div class="form-group">
+                        <label>Subtitle</label>
+                        <input type="text" id="heroSubtitle" placeholder="AI/ML Engineer | Full Stack Developer">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="heroDesc" placeholder="Building intelligent solutions with AI and Machine Learning"></textarea>
+                    </div>
+                    <button class="btn-add" onclick="updateHero()">Update Hero</button>
+                </div>
+            </div>
+
+            <!-- About Tab -->
+            <div id="about" class="tab-content">
+                <div class="form-section">
+                    <h3>Edit About Section</h3>
+                    <div class="form-group">
+                        <label>Professional Summary</label>
+                        <textarea id="aboutText" placeholder="Your professional summary"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Profile Image</label>
+                        <input type="file" id="aboutImage" accept="image/*">
+                        <img id="aboutImagePreview" class="image-preview" style="display:none; max-width:200px; max-height:150px; margin-top:10px; border-radius:5px;">
+                    </div>
+                    <button class="btn-add" onclick="updateAbout()">Update About</button>
+                </div>
+            </div>
+
+            <!-- Skills Tab -->
+            <div id="skills" class="tab-content">
+                <div class="form-section">
+                    <h3>Manage Skills</h3>
+                    <div class="form-group">
+                        <label>Add New Skill</label>
+                        <div style="display: flex; gap: 1rem;">
+                            <input type="text" id="newSkill" placeholder="Enter skill name (e.g., Python, React)">
+                            <button class="btn-add" onclick="addSkill()">Add Skill</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="skillsList" class="items-list"></div>
+            </div>
+
+            <!-- Projects Tab -->
+            <div id="projects" class="tab-content">
+                <div class="form-section" id="projectFormSection">
+                    <h3 id="projectFormTitle">Add New Project</h3>
+                    <div class="form-group">
+                        <label>Project Name</label>
+                        <input type="text" id="projectName" placeholder="Project name">
+                    </div>
+                    <div class="form-group">
+                        <label>Project Description</label>
+                        <textarea id="projectDesc" placeholder="Project description"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Technologies (comma-separated)</label>
+                            <input type="text" id="projectTech" placeholder="Python, TensorFlow, Keras">
+                        </div>
+                        <div class="form-group">
+                            <label>GitHub Link</label>
+                            <input type="url" id="projectGithub" placeholder="https://github.com/...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Project Image</label>
+                        <input type="file" id="projectImage" accept="image/*">
+                        <img id="projectImagePreview" class="image-preview" style="display:none; max-width:200px; max-height:150px; margin-top:10px; border-radius:5px;">
+                    </div>
+                    <div>
+                        <button class="btn-add" id="projectFormBtn" onclick="addProject()">Add Project</button>
+                        <button class="btn-cancel" id="projectFormCancelBtn" onclick="cancelProjectEdit()" style="display:none; background-color:#999; color:white; padding:12px 24px; border:none; border-radius:5px; cursor:pointer; font-weight:600; margin-left:10px;">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="projectsList" class="items-list"></div>
+            </div>
+
+            <!-- Blog Tab -->
+            <div id="blog" class="tab-content">
+                <div class="form-section" id="blogFormSection">
+                    <h3 id="blogFormTitle">Add New Blog Post</h3>
+                    <div class="form-group">
+                        <label>Blog Title</label>
+                        <input type="text" id="blogTitle" placeholder="Blog post title">
+                    </div>
+                    <div class="form-group">
+                        <label>Blog Summary</label>
+                        <textarea id="blogSummary" placeholder="Short summary of the blog post"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Blog Content</label>
+                        <textarea id="blogContent" placeholder="Full blog post content" style="min-height:200px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Featured Image</label>
+                        <input type="file" id="blogImage" accept="image/*">
+                        <img id="blogImagePreview" class="image-preview" style="display:none; max-width:200px; max-height:150px; margin-top:10px; border-radius:5px;">
+                    </div>
+                    <div>
+                        <button class="btn-add" id="blogFormBtn" onclick="addBlog()">Add Blog</button>
+                        <button class="btn-cancel" id="blogFormCancelBtn" onclick="cancelBlogEdit()" style="display:none; background-color:#999; color:white; padding:12px 24px; border:none; border-radius:5px; cursor:pointer; font-weight:600; margin-left:10px;">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="blogList" class="items-list"></div>
+            </div>
+
+            <!-- Certifications Tab -->
+            <div id="certifications" class="tab-content">
+                <div class="form-section" id="certFormSection">
+                    <h3 id="certFormTitle">Add New Certification</h3>
+                    <div class="form-group">
+                        <label>Certification Name</label>
+                        <input type="text" id="certName" placeholder="Certification name">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Issuer</label>
+                            <input type="text" id="certIssuer" placeholder="Organization name">
+                        </div>
+                        <div class="form-group">
+                            <label>Year</label>
+                            <input type="text" id="certYear" placeholder="2024">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="certDesc" placeholder="Certification description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Certificate Image</label>
+                        <input type="file" id="certImage" accept="image/*">
+                        <img id="certImagePreview" class="image-preview" style="display:none; max-width:200px; max-height:150px; margin-top:10px; border-radius:5px;">
+                    </div>
+                    <div>
+                        <button class="btn-add" id="certFormBtn" onclick="addCertification()">Add Certificate</button>
+                        <button class="btn-cancel" id="certFormCancelBtn" onclick="cancelCertEdit()" style="display:none; background-color:#999; color:white; padding:12px 24px; border:none; border-radius:5px; cursor:pointer; font-weight:600; margin-left:10px;">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="certificationsList" class="items-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if admin is logged in
+        if (localStorage.getItem('isAdmin') !== 'true') {
+            alert('Unauthorized! Please login as admin first.');
+            window.location.href = 'index.html';
+        }
+
+        // Global edit states
+        let editingProjectId = null;
+        let editingBlogId = null;
+        let editingCertId = null;
+
+        // Logout
+        function adminLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('isAdmin');
+                alert('Logged out successfully');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabName === 'hero') loadHero();
+            if (tabName === 'about') loadAbout();
+            if (tabName === 'skills') loadSkills();
+            if (tabName === 'projects') loadProjects();
+            if (tabName === 'blog') loadBlogs();
+            if (tabName === 'certifications') loadCertifications();
+        }
+
+        // Image file to base64 converter
+        function fileToBase64(file, callback) {
+            const reader = new FileReader();
+            reader.onload = (e) => callback(e.target.result);
+            reader.readAsDataURL(file);
+        }
+
+        // ===== HERO MANAGEMENT =====
+        function updateHero() {
+            const title = document.getElementById('heroTitle').value.trim();
+            const subtitle = document.getElementById('heroSubtitle').value.trim();
+            const desc = document.getElementById('heroDesc').value.trim();
+
+            if (!title || !subtitle || !desc) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            localStorage.setItem('portfolioHero', JSON.stringify({ title, subtitle, desc }));
+            alert('Hero section updated!');
+            loadHero();
+        }
+
+        function loadHero() {
+            const heroData = JSON.parse(localStorage.getItem('portfolioHero')) || {
+                title: "Hi, I'm Aryan Raj",
+                subtitle: 'AI/ML Engineer | Full Stack Developer | Data Analyst',
+                desc: 'Building intelligent solutions with AI and Machine Learning'
+            };
+
+            document.getElementById('heroTitle').value = heroData.title;
+            document.getElementById('heroSubtitle').value = heroData.subtitle;
+            document.getElementById('heroDesc').value = heroData.desc;
+        }
+
+        // ===== ABOUT MANAGEMENT =====
+        function updateAbout() {
+            const about = document.getElementById('aboutText').value.trim();
+            const imageFile = document.getElementById('aboutImage').files[0];
+
+            if (!about) {
+                alert('Please fill the summary field');
+                return;
+            }
+
+            const aboutData = { about, image: localStorage.getItem('portfolioAboutImage') || null };
+
+            if (imageFile) {
+                fileToBase64(imageFile, (base64) => {
+                    aboutData.image = base64;
+                    localStorage.setItem('portfolioAbout', JSON.stringify(aboutData));
+                    localStorage.setItem('portfolioAboutImage', base64);
+                    alert('About section updated with image!');
+                    loadAbout();
+                });
+            } else {
+                localStorage.setItem('portfolioAbout', JSON.stringify(aboutData));
+                alert('About section updated!');
+                loadAbout();
+            }
+        }
+
+        function loadAbout() {
+            const aboutData = JSON.parse(localStorage.getItem('portfolioAbout')) || {
+                about: 'I\'m a Computer Science Engineering student specializing in Artificial Intelligence and Machine Learning.'
+            };
+
+            document.getElementById('aboutText').value = aboutData.about;
+            if (aboutData.image) {
+                document.getElementById('aboutImagePreview').src = aboutData.image;
+                document.getElementById('aboutImagePreview').style.display = 'block';
+            } else {
+                document.getElementById('aboutImagePreview').style.display = 'none';
+            }
+        }
+
+        // ===== SKILLS MANAGEMENT =====
+        function addSkill() {
+            const skill = document.getElementById('newSkill').value.trim();
+            if (!skill) {
+                alert('Please enter a skill name');
+                return;
+            }
+
+            let skills = JSON.parse(localStorage.getItem('portfolioSkills')) || [];
+            if (skills.includes(skill)) {
+                alert('This skill already exists');
+                return;
+            }
+            skills.push(skill);
+            localStorage.setItem('portfolioSkills', JSON.stringify(skills));
+            
+            document.getElementById('newSkill').value = '';
+            loadSkills();
+            alert('Skill added successfully!');
+        }
+
+        function deleteSkill(index) {
+            if (confirm('Delete this skill?')) {
+                let skills = JSON.parse(localStorage.getItem('portfolioSkills')) || [];
+                skills.splice(index, 1);
+                localStorage.setItem('portfolioSkills', JSON.stringify(skills));
+                loadSkills();
+            }
+        }
+
+        function loadSkills() {
+            const skills = JSON.parse(localStorage.getItem('portfolioSkills')) || [
+                'Python', 'Machine Learning', 'Deep Learning', 'TensorFlow', 'React', 'Node.js', 'NLP', 'Data Analytics', 'CNNs', 'Git'
+            ];
+            
+            const skillsList = document.getElementById('skillsList');
+            if (skills.length === 0) {
+                skillsList.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No skills added yet</p></div>';
+                return;
+            }
+
+            skillsList.innerHTML = skills.map((skill, i) => `
+                <div class="item-card">
+                    <div class="item-content">
+                        <h4>${skill}</h4>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-delete" onclick="deleteSkill(${i})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== PROJECTS MANAGEMENT =====
+        function addProject() {
+            const name = document.getElementById('projectName').value.trim();
+            const desc = document.getElementById('projectDesc').value.trim();
+            const tech = document.getElementById('projectTech').value.trim();
+            const github = document.getElementById('projectGithub').value.trim();
+            const imageFile = document.getElementById('projectImage').files[0];
+
+            if (!name || !desc || !tech) {
+                alert('Please fill all required fields');
+                return;
+            }
+
+            const project = { 
+                id: editingProjectId || Date.now(), 
+                name, desc, 
+                tech: tech.split(',').map(t => t.trim()), 
+                github,
+                image: editingProjectId ? document.getElementById('projectImagePreview').src : null
+            };
+
+            if (imageFile) {
+                fileToBase64(imageFile, (base64) => {
+                    project.image = base64;
+                    saveProject(project);
+                });
+            } else {
+                saveProject(project);
+            }
+        }
+
+        function saveProject(project) {
+            let projects = JSON.parse(localStorage.getItem('portfolioProjects')) || [];
+            
+            if (editingProjectId) {
+                projects = projects.map(p => p.id === editingProjectId ? project : p);
+                alert('Project updated!');
+            } else {
+                projects.push(project);
+                alert('Project added!');
+            }
+
+            localStorage.setItem('portfolioProjects', JSON.stringify(projects));
+            clearProjectForm();
+            loadProjects();
+        }
+
+        function editProject(id) {
+            let projects = JSON.parse(localStorage.getItem('portfolioProjects')) || [];
+            const project = projects.find(p => p.id === id);
+            
+            if (project) {
+                editingProjectId = id;
+                document.getElementById('projectName').value = project.name;
+                document.getElementById('projectDesc').value = project.desc;
+                document.getElementById('projectTech').value = project.tech.join(', ');
+                document.getElementById('projectGithub').value = project.github || '';
+                
+                if (project.image) {
+                    document.getElementById('projectImagePreview').src = project.image;
+                    document.getElementById('projectImagePreview').style.display = 'block';
+                }
+                
+                document.getElementById('projectFormTitle').textContent = 'Edit Project';
+                document.getElementById('projectFormBtn').textContent = 'Update Project';
+                document.getElementById('projectFormCancelBtn').style.display = 'inline-block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function cancelProjectEdit() {
+            clearProjectForm();
+        }
+
+        function clearProjectForm() {
+            editingProjectId = null;
+            document.getElementById('projectName').value = '';
+            document.getElementById('projectDesc').value = '';
+            document.getElementById('projectTech').value = '';
+            document.getElementById('projectGithub').value = '';
+            document.getElementById('projectImage').value = '';
+            document.getElementById('projectImagePreview').style.display = 'none';
+            document.getElementById('projectFormTitle').textContent = 'Add New Project';
+            document.getElementById('projectFormBtn').textContent = 'Add Project';
+            document.getElementById('projectFormCancelBtn').style.display = 'none';
+        }
+
+        function deleteProject(id) {
+            if (confirm('Delete this project?')) {
+                let projects = JSON.parse(localStorage.getItem('portfolioProjects')) || [];
+                projects = projects.filter(p => p.id !== id);
+                localStorage.setItem('portfolioProjects', JSON.stringify(projects));
+                loadProjects();
+            }
+        }
+
+        function loadProjects() {
+            const projects = JSON.parse(localStorage.getItem('portfolioProjects')) || [];
+            const projectsList = document.getElementById('projectsList');
+            
+            if (projects.length === 0) {
+                projectsList.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No projects added yet</p></div>';
+                return;
+            }
+
+            projectsList.innerHTML = projects.map(p => `
+                <div class="item-card">
+                    ${p.image ? `<img src="${p.image}" alt="${p.name}" style="max-width:100px; max-height:100px; border-radius:5px; object-fit:cover;">` : ''}
+                    <div class="item-content">
+                        <h4>${p.name}</h4>
+                        <p>${p.desc}</p>
+                        <p><strong>Tech:</strong> ${p.tech.join(', ')}</p>
+                        ${p.github ? `<p><a href="${p.github}" target="_blank">GitHub Link</a></p>` : ''}
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-edit" onclick="editProject(${p.id})">Edit</button>
+                        <button class="btn-delete" onclick="deleteProject(${p.id})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== BLOG MANAGEMENT =====
+        function addBlog() {
+            const title = document.getElementById('blogTitle').value.trim();
+            const summary = document.getElementById('blogSummary').value.trim();
+            const content = document.getElementById('blogContent').value.trim();
+            const imageFile = document.getElementById('blogImage').files[0];
+
+            if (!title || !summary || !content) {
+                alert('Please fill all required fields');
+                return;
+            }
+
+            const blog = {
+                id: editingBlogId || Date.now(),
+                title, summary, content,
+                image: editingBlogId ? document.getElementById('blogImagePreview').src : null,
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            if (imageFile) {
+                fileToBase64(imageFile, (base64) => {
+                    blog.image = base64;
+                    saveBlog(blog);
+                });
+            } else {
+                saveBlog(blog);
+            }
+        }
+
+        function saveBlog(blog) {
+            let blogs = JSON.parse(localStorage.getItem('portfolioBlogs')) || [];
+            
+            if (editingBlogId) {
+                blogs = blogs.map(b => b.id === editingBlogId ? blog : b);
+                alert('Blog updated!');
+            } else {
+                blogs.push(blog);
+                alert('Blog added!');
+            }
+
+            localStorage.setItem('portfolioBlogs', JSON.stringify(blogs));
+            clearBlogForm();
+            loadBlogs();
+        }
+
+        function editBlog(id) {
+            let blogs = JSON.parse(localStorage.getItem('portfolioBlogs')) || [];
+            const blog = blogs.find(b => b.id === id);
+            
+            if (blog) {
+                editingBlogId = id;
+                document.getElementById('blogTitle').value = blog.title;
+                document.getElementById('blogSummary').value = blog.summary;
+                document.getElementById('blogContent').value = blog.content;
+                
+                if (blog.image) {
+                    document.getElementById('blogImagePreview').src = blog.image;
+                    document.getElementById('blogImagePreview').style.display = 'block';
+                }
+                
+                document.getElementById('blogFormTitle').textContent = 'Edit Blog Post';
+                document.getElementById('blogFormBtn').textContent = 'Update Blog';
+                document.getElementById('blogFormCancelBtn').style.display = 'inline-block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function cancelBlogEdit() {
+            clearBlogForm();
+        }
+
+        function clearBlogForm() {
+            editingBlogId = null;
+            document.getElementById('blogTitle').value = '';
+            document.getElementById('blogSummary').value = '';
+            document.getElementById('blogContent').value = '';
+            document.getElementById('blogImage').value = '';
+            document.getElementById('blogImagePreview').style.display = 'none';
+            document.getElementById('blogFormTitle').textContent = 'Add New Blog Post';
+            document.getElementById('blogFormBtn').textContent = 'Add Blog';
+            document.getElementById('blogFormCancelBtn').style.display = 'none';
+        }
+
+        function deleteBlog(id) {
+            if (confirm('Delete this blog post?')) {
+                let blogs = JSON.parse(localStorage.getItem('portfolioBlogs')) || [];
+                blogs = blogs.filter(b => b.id !== id);
+                localStorage.setItem('portfolioBlogs', JSON.stringify(blogs));
+                loadBlogs();
+            }
+        }
+
+        function loadBlogs() {
+            const blogs = JSON.parse(localStorage.getItem('portfolioBlogs')) || [];
+            const blogList = document.getElementById('blogList');
+            
+            if (blogs.length === 0) {
+                blogList.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No blog posts yet</p></div>';
+                return;
+            }
+
+            blogList.innerHTML = blogs.map(b => `
+                <div class="item-card">
+                    ${b.image ? `<img src="${b.image}" alt="${b.title}" style="max-width:100px; max-height:100px; border-radius:5px; object-fit:cover;">` : ''}
+                    <div class="item-content">
+                        <h4>${b.title}</h4>
+                        <p>${b.summary}</p>
+                        <p><small>Date: ${b.date}</small></p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-edit" onclick="editBlog(${b.id})">Edit</button>
+                        <button class="btn-delete" onclick="deleteBlog(${b.id})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== CERTIFICATIONS MANAGEMENT =====
+        function addCertification() {
+            const name = document.getElementById('certName').value.trim();
+            const issuer = document.getElementById('certIssuer').value.trim();
+            const year = document.getElementById('certYear').value.trim();
+            const desc = document.getElementById('certDesc').value.trim();
+            const imageFile = document.getElementById('certImage').files[0];
+
+            if (!name || !issuer || !year) {
+                alert('Please fill all required fields');
+                return;
+            }
+
+            const cert = {
+                id: editingCertId || Date.now(),
+                name, issuer, year, desc,
+                image: editingCertId ? document.getElementById('certImagePreview').src : null
+            };
+
+            if (imageFile) {
+                fileToBase64(imageFile, (base64) => {
+                    cert.image = base64;
+                    saveCert(cert);
+                });
+            } else {
+                saveCert(cert);
+            }
+        }
+
+        function saveCert(cert) {
+            let certs = JSON.parse(localStorage.getItem('portfolioCertifications')) || [];
+            
+            if (editingCertId) {
+                certs = certs.map(c => c.id === editingCertId ? cert : c);
+                alert('Certificate updated!');
+            } else {
+                certs.push(cert);
+                alert('Certificate added!');
+            }
+
+            localStorage.setItem('portfolioCertifications', JSON.stringify(certs));
+            clearCertForm();
+            loadCertifications();
+        }
+
+        function editCert(id) {
+            let certs = JSON.parse(localStorage.getItem('portfolioCertifications')) || [];
+            const cert = certs.find(c => c.id === id);
+            
+            if (cert) {
+                editingCertId = id;
+                document.getElementById('certName').value = cert.name;
+                document.getElementById('certIssuer').value = cert.issuer;
+                document.getElementById('certYear').value = cert.year;
+                document.getElementById('certDesc').value = cert.desc || '';
+                
+                if (cert.image) {
+                    document.getElementById('certImagePreview').src = cert.image;
+                    document.getElementById('certImagePreview').style.display = 'block';
+                }
+                
+                document.getElementById('certFormTitle').textContent = 'Edit Certificate';
+                document.getElementById('certFormBtn').textContent = 'Update Certificate';
+                document.getElementById('certFormCancelBtn').style.display = 'inline-block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function cancelCertEdit() {
+            clearCertForm();
+        }
+
+        function clearCertForm() {
+            editingCertId = null;
+            document.getElementById('certName').value = '';
+            document.getElementById('certIssuer').value = '';
+            document.getElementById('certYear').value = '';
+            document.getElementById('certDesc').value = '';
+            document.getElementById('certImage').value = '';
+            document.getElementById('certImagePreview').style.display = 'none';
+            document.getElementById('certFormTitle').textContent = 'Add New Certificate';
+            document.getElementById('certFormBtn').textContent = 'Add Certificate';
+            document.getElementById('certFormCancelBtn').style.display = 'none';
+        }
+
+        function deleteCert(id) {
+            if (confirm('Delete this certificate?')) {
+                let certs = JSON.parse(localStorage.getItem('portfolioCertifications')) || [];
+                certs = certs.filter(c => c.id !== id);
+                localStorage.setItem('portfolioCertifications', JSON.stringify(certs));
+                loadCertifications();
+            }
+        }
+
+        function loadCertifications() {
+            const certs = JSON.parse(localStorage.getItem('portfolioCertifications')) || [];
+            const certsList = document.getElementById('certificationsList');
+            
+            if (certs.length === 0) {
+                certsList.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No certificates added yet</p></div>';
+                return;
+            }
+
+            certsList.innerHTML = certs.map(c => `
+                <div class="item-card">
+                    ${c.image ? `<img src="${c.image}" alt="${c.name}" style="max-width:100px; max-height:100px; border-radius:5px; object-fit:cover;">` : ''}
+                    <div class="item-content">
+                        <h4>${c.name}</h4>
+                        <p><strong>Issuer:</strong> ${c.issuer}</p>
+                        <p><strong>Year:</strong> ${c.year}</p>
+                        <p>${c.desc || ''}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-edit" onclick="editCert(${c.id})">Edit</button>
+                        <button class="btn-delete" onclick="deleteCert(${c.id})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load initial data
+        window.addEventListener('load', () => {
+            loadHero();
+            loadSkills();
+        });
+    </script>
+</body>
+</html>

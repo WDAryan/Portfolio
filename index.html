@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">Portfolio</div>
+                <ul class="nav-menu active">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="admin.html" id="adminDashboardBtn" class="admin-dashboard-btn" style="display:none;" title="Admin Dashboard"><i class="fas fa-cog"></i></a>
+                    <button id="adminToggleBtn" class="admin-toggle" title="Admin Panel"><i class="fas fa-lock"></i></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm Aryan Raj</h1>
+            <p class="subtitle">AI/ML Engineer | Full Stack Developer | Data Analyst</p>
+            <p class="description">Building intelligent solutions with AI and Machine Learning</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+        <div class="social-links">
+            <a href="https://github.com/WDAryan" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/aryanrajr1" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:aryanrajr1@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a <strong>Computer Science Engineering student</strong> specializing in Artificial Intelligence and Machine Learning. Passionate about building intelligent solutions using AI technologies, with hands-on experience in machine learning, deep learning, and data analytics.</p>
+                    <p>Currently contributing to real-world AI applications through internships at leading organizations including Microsoft, SAP, Shell India, and EY. Proficient in Python, TensorFlow, Keras, and modern web technologies.</p>
+                    <div class="skills">
+                        <h3>Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">NLP</span>
+                            <span class="skill-tag">Data Analytics</span>
+                            <span class="skill-tag">CNNs</span>
+                            <span class="skill-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="images/profile.jpg" alt="Profile Picture">
+                </div>
+            </div>
+
+            <!-- Certificates Section -->
+            <div class="certificates-section">
+                <h3>Certificates & Achievements</h3>
+                <div class="certificates-grid">
+                    <div class="certificate-card" onclick="openCertificateModal('certificate/Screenshot 2026-03-16 164622.png')">
+                        <img src="certificate/Screenshot 2026-03-16 164622.png" alt="Generative AI Virtual Internship">
+                        <h4>Generative AI Virtual Internship</h4>
+                        <p>Skillible & AICTE - 2024</p>
+                    </div>
+                    <div class="certificate-card" onclick="openCertificateModal('certificate/Screenshot 2026-03-16 164935.png')">
+                        <img src="certificate/Screenshot 2026-03-16 164935.png" alt="Ethical Hacker Course">
+                        <h4>Ethical Hacker Course</h4>
+                        <p>Cisco Networking Academy</p>
+                    </div>
+                    <div class="certificate-card" onclick="openCertificateModal('certificate/Screenshot 2026-03-16 165204.png')">
+                        <img src="certificate/Screenshot 2026-03-16 165204.png" alt="Wipro TalentNext Data Science">
+                        <h4>Wipro TalentNext Data Science</h4>
+                        <p>Wipro - Data Science Program</p>
+                    </div>
+                    <div class="certificate-card" onclick="openCertificateModal('certificate/Screenshot 2026-03-16 165232.png')">
+                        <img src="certificate/Screenshot 2026-03-16 165232.png" alt="Data Visualization Certification">
+                        <h4>Data Visualization Certification</h4>
+                        <p>Business Insights & Analytics</p>
+                    </div>
+                    <div class="certificate-card" onclick="openCertificateModal('certificate/Screenshot 2026-03-16 165255.png')">
+                        <img src="certificate/Screenshot 2026-03-16 165255.png" alt="Additional Certification">
+                        <h4>Advanced Analytics</h4>
+                        <p>Professional Certification</p>
+                    </div>
+                    <div class="certificate-card" onclick="openCertificateModal('certificate/Screenshot 2026-03-16 165327.png')">
+                        <img src="certificate/Screenshot 2026-03-16 165327.png" alt="Machine Learning Certification">
+                        <h4>Machine Learning Fundamentals</h4>
+                        <p>Certified Professional</p>
+                    </div>
+                    <div class="certificate-card" onclick="openCertificateModal('certificate/Screenshot 2026-03-16 165422.png')">
+                        <img src="certificate/Screenshot 2026-03-16 165422.png" alt="Data Science Excellence">
+                        <h4>Data Science Excellence Award</h4>
+                        <p>Industry Recognition</p>
+                    </div>
+                    <div class="certificate-card" onclick="openCertificateModal('certificate/Screenshot 2026-03-16 165504.png')">
+                        <img src="certificate/Screenshot 2026-03-16 165504.png" alt="Professional Development">
+                        <h4>Professional Development</h4>
+                        <p>Advanced Training Program</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/project1.jpg" alt="Fruit & Vegetable Classification">
+                    </div>
+                    <div class="project-info">
+                        <h3>Fruit & Vegetable Image Classification</h3>
+                        <p>Deep learning CNN model achieving 93% accuracy on 5,000+ images. Implemented data augmentation and deployed using Streamlit for real-time predictions.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>TensorFlow</span>
+                            <span>Keras</span>
+                            <span>CNN</span>
+                            <span>Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-btn">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/project2.jpg" alt="Spam Email Detection">
+                    </div>
+                    <div class="project-info">
+                        <h3>Spam Email Detection System</h3>
+                        <p>Machine learning classification model achieving ~90% accuracy. Processed and cleaned 5,000+ email records using NLP preprocessing techniques for improved model performance.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>Machine Learning</span>
+                            <span>NLP</span>
+                            <span>Data Preprocessing</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-btn">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/project3.jpg" alt="Air Quality Prediction">
+                    </div>
+                    <div class="project-info">
+                        <h3>Air Quality Index Prediction Model</h3>
+                        <p>ML-based prediction system improving accuracy by 15%. Analyzed 10,000+ environmental records with data insights and visualizations for environmental trend analysis.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>Machine Learning</span>
+                            <span>Data Analytics</span>
+                            <span>Visualization</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-btn">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2 class="section-title">Latest Blog Posts</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="images/blog1.jpg" alt="Blog Post 1">
+                    <div class="blog-content">
+                        <span class="blog-date">March 16, 2026</span>
+                        <h3>Getting Started with Web Development</h3>
+                        <p>Learn the fundamentals of HTML, CSS, and JavaScript to start your web development journey...</p>
+                        <a href="blog/post1.html" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="images/blog2.jpg" alt="Blog Post 2">
+                    <div class="blog-content">
+                        <span class="blog-date">March 10, 2026</span>
+                        <h3>Tips for Responsive Web Design</h3>
+                        <p>Master the art of creating responsive websites that work perfectly on all devices...</p>
+                        <a href="blog/post2.html" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="images/blog3.jpg" alt="Blog Post 3">
+                    <div class="blog-content">
+                        <span class="blog-date">March 5, 2026</span>
+                        <h3>JavaScript Best Practices</h3>
+                        <p>Write cleaner, more efficient JavaScript code by following these industry best practices...</p>
+                        <a href="blog/post3.html" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="testimonials" class="reviews">
+        <div class="container">
+            <h2 class="section-title">Leave Your Review</h2>
+            <div class="reviews-content">
+                <p class="reviews-description">Have you worked with me or used my projects? Share your feedback and help others learn about my work!</p>
+                <form class="review-form" id="reviewForm">
+                    <div class="review-form-group">
+                        <label for="reviewName">Your Name</label>
+                        <input type="text" id="reviewName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="review-form-group">
+                        <label for="reviewEmail">Your Email</label>
+                        <input type="email" id="reviewEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="review-form-group">
+                        <label for="reviewRole">Your Role/Organization</label>
+                        <input type="text" id="reviewRole" placeholder="e.g., Manager at Tech Company" required>
+                    </div>
+                    <div class="review-form-group">
+                        <label for="reviewRating">Rating</label>
+                        <div class="star-rating" id="starRating">
+                            <i class="fas fa-star" data-value="1"></i>
+                            <i class="fas fa-star" data-value="2"></i>
+                            <i class="fas fa-star" data-value="3"></i>
+                            <i class="fas fa-star" data-value="4"></i>
+                            <i class="fas fa-star" data-value="5"></i>
+                        </div>
+                        <input type="hidden" id="ratingValue" value="0">
+                    </div>
+                    <div class="review-form-group">
+                        <label for="reviewText">Your Review</label>
+                        <textarea id="reviewText" placeholder="Share your experience and feedback..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+                <div id="submittedReviews" class="submitted-reviews">
+                    <div class="submitted-reviews-header">
+                        <h3>Reviews from My Network</h3>
+                        <button id="clearReviewsBtn" class="btn-clear-reviews" style="display:none;">Clear All Reviews</button>
+                    </div>
+                    <div id="reviewsList" class="reviews-list"></div>
+                </div>
+                <div id="adminPanel" class="admin-panel" style="display:none;">
+                    <button id="adminLogoutBtn" class="btn-admin-logout">Admin Logout</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:aryanrajr1@gmail.com">aryanrajr1@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p><a href="tel:+919334594303">+91 9334594303</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-location-dot"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Bhopal, India</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h4>GitHub</h4>
+                            <p><a href="https://github.com/WDAryan" target="_blank">github.com/WDAryan</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <p><a href="https://www.linkedin.com/in/aryanrajr1" target="_blank">linkedin.com/in/aryanrajr1</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="admin-login-modal">
+        <div class="admin-login-content">
+            <h2>Admin Login</h2>
+            <form class="admin-login-form" id="adminLoginForm">
+                <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                <div class="admin-login-buttons">
+                    <button type="submit" class="btn-login">Login</button>
+                    <button type="button" class="btn-cancel" id="cancelLoginBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Aryan Raj. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="https://github.com/WDAryan"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/aryanrajr1"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="certificate-modal">
+        <div class="certificate-modal-content">
+            <button class="certificate-close" onclick="closeCertificateModal()">&times;</button>
+            <img id="certificateImage" src="" alt="Certificate">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
