@@ -275,6 +275,7 @@
             <button class="admin-tab" onclick="switchTab('about')">About</button>
             <button class="admin-tab" onclick="switchTab('skills')">Skills</button>
             <button class="admin-tab" onclick="switchTab('projects')">Projects</button>
+            <button class="admin-tab" onclick="switchTab('experience')">Experience</button>
             <button class="admin-tab" onclick="switchTab('blog')">Blog</button>
             <button class="admin-tab" onclick="switchTab('certifications')">Certificates</button>
         </div>
@@ -367,6 +368,35 @@
                 </div>
 
                 <div id="projectsList" class="items-list"></div>
+            </div>
+
+            <!-- Experience Tab -->
+            <div id="experience" class="tab-content">
+                <div class="form-section" id="experienceFormSection">
+                    <h3 id="experienceFormTitle">Add Work Experience</h3>
+                    <div class="form-group">
+                        <label>Job Title/Position</label>
+                        <input type="text" id="expTitle" placeholder="e.g., AI/ML Engineer">
+                    </div>
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" id="expCompany" placeholder="Company name or organization">
+                    </div>
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <input type="text" id="expDuration" placeholder="e.g., Jan 2024 - Mar 2024">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="expDescription" placeholder="Describe your role, responsibilities, and achievements" rows="5"></textarea>
+                    </div>
+                    <div>
+                        <button class="btn-add" id="expFormBtn" onclick="addExperience()">Add Experience</button>
+                        <button class="btn-cancel" id="expFormCancelBtn" onclick="cancelExperienceEdit()" style="display:none; background-color:#999; color:white; padding:12px 24px; border:none; border-radius:5px; cursor:pointer; font-weight:600; margin-left:10px;">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="experienceList" class="items-list"></div>
             </div>
 
             <!-- Blog Tab -->
@@ -966,7 +996,116 @@
         window.addEventListener('load', () => {
             loadHero();
             loadSkills();
+            loadExperiencesList();
         });
+
+        // Experience Management
+        let editingExpId = null;
+
+        function addExperience() {
+            const title = document.getElementById('expTitle').value.trim();
+            const company = document.getElementById('expCompany').value.trim();
+            const duration = document.getElementById('expDuration').value.trim();
+            const description = document.getElementById('expDescription').value.trim();
+
+            if (!title || !company || !duration || !description) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const experience = {
+                id: editingExpId || Date.now(),
+                title,
+                company,
+                duration,
+                description
+            };
+
+            saveExperience(experience);
+        }
+
+        function saveExperience(exp) {
+            let experiences = JSON.parse(localStorage.getItem('portfolioExperiences')) || [];
+            
+            if (editingExpId) {
+                experiences = experiences.map(e => e.id === editingExpId ? exp : e);
+                alert('Experience updated!');
+            } else {
+                experiences.push(exp);
+                alert('Experience added!');
+            }
+
+            localStorage.setItem('portfolioExperiences', JSON.stringify(experiences));
+            clearExperienceForm();
+            loadExperiencesList();
+        }
+
+        function editExperience(id) {
+            let experiences = JSON.parse(localStorage.getItem('portfolioExperiences')) || [];
+            const exp = experiences.find(e => e.id === id);
+            
+            if (exp) {
+                editingExpId = id;
+                document.getElementById('expTitle').value = exp.title;
+                document.getElementById('expCompany').value = exp.company;
+                document.getElementById('expDuration').value = exp.duration;
+                document.getElementById('expDescription').value = exp.description;
+                
+                document.getElementById('experienceFormTitle').textContent = 'Edit Experience';
+                document.getElementById('expFormBtn').textContent = 'Update Experience';
+                document.getElementById('expFormCancelBtn').style.display = 'inline-block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function cancelExperienceEdit() {
+            clearExperienceForm();
+        }
+
+        function clearExperienceForm() {
+            editingExpId = null;
+            document.getElementById('expTitle').value = '';
+            document.getElementById('expCompany').value = '';
+            document.getElementById('expDuration').value = '';
+            document.getElementById('expDescription').value = '';
+            document.getElementById('experienceFormTitle').textContent = 'Add Work Experience';
+            document.getElementById('expFormBtn').textContent = 'Add Experience';
+            document.getElementById('expFormCancelBtn').style.display = 'none';
+        }
+
+        function deleteExperience(id) {
+            if (confirm('Delete this experience?')) {
+                let experiences = JSON.parse(localStorage.getItem('portfolioExperiences')) || [];
+                experiences = experiences.filter(e => e.id !== id);
+                localStorage.setItem('portfolioExperiences', JSON.stringify(experiences));
+                loadExperiencesList();
+            }
+        }
+
+        function loadExperiencesList() {
+            const experiences = JSON.parse(localStorage.getItem('portfolioExperiences')) || [];
+            const expList = document.getElementById('experienceList');
+            
+            if (experiences.length === 0) {
+                expList.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No experiences added yet</p></div>';
+                return;
+            }
+
+            expList.innerHTML = experiences.map(exp => `
+                <div class="item-card">
+                    <div class="item-content">
+                        <h4>${exp.title}</h4>
+                        <p><strong>Company:</strong> ${exp.company}</p>
+                        <p><strong>Duration:</strong> ${exp.duration}</p>
+                        <p>${exp.description}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-edit" onclick="editExperience(${exp.id})">Edit</button>
+                        <button class="btn-delete" onclick="deleteExperience(${exp.id})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
     </script>
 </body>
 </html>

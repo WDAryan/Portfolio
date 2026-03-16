@@ -195,6 +195,35 @@ function loadReviews() {
     });
 }
 
+// Function to load and display experiences from localStorage
+function loadExperiences() {
+    const experienceList = document.querySelector('#experienceList');
+    const experiences = JSON.parse(localStorage.getItem('portfolioExperiences')) || [];
+    
+    if (experiences.length === 0) {
+        experienceList.innerHTML = '<div class="experience-empty">No experiences yet.</div>';
+        return;
+    }
+    
+    experienceList.innerHTML = '';
+    experiences.forEach(exp => {
+        const expElement = document.createElement('div');
+        expElement.className = 'experience-item';
+        
+        expElement.innerHTML = `
+            <h3>${exp.title}</h3>
+            <div class="experience-company">${exp.company}</div>
+            <div class="experience-duration">
+                <i class="fas fa-calendar"></i>
+                ${exp.duration}
+            </div>
+            <p class="experience-description">${exp.description}</p>
+        `;
+        
+        experienceList.appendChild(expElement);
+    });
+}
+
 // Scroll Animation for elements
 function revealOnScroll() {
     const elements = document.querySelectorAll('.project-card, .blog-card, .certificate-card');
@@ -215,10 +244,50 @@ function revealOnScroll() {
     });
 }
 
+// Initialize default experiences if they don't exist
+function initializeDefaultExperiences() {
+    const existing = localStorage.getItem('portfolioExperiences');
+    if (!existing) {
+        const defaultExperiences = [
+            {
+                id: 1,
+                title: "Virtual Internship in Gen AI",
+                company: "Virtual",
+                duration: "6-week internship",
+                description: "Participated in a 6-week virtual internship focused on generative AI, gaining hands-on experience with cutting-edge AI technologies."
+            },
+            {
+                id: 2,
+                title: "Internship on AI: Transformative Learning with TechSaksham",
+                company: "Skillible / AICTE (Microsoft & SAP joint CSR initiative)",
+                duration: "Dec 2024 - Jan 2025 (6 weeks)",
+                description: "Completed an internship focusing on AI technologies, culminating in a project on \"Spam Email Detection.\" Worked on developing an AI model to identify and filter spam emails, enhancing email security and user experience."
+            },
+            {
+                id: 3,
+                title: "AI and Data Analytics Virtual Internship",
+                company: "AICTE, Shell India & Edunet Foundation",
+                duration: "Feb - Mar 2025 (4 weeks)",
+                description: "Completed a 4-week internship focused on AI and Data Analytics with an emphasis on green skills in the project \"AQI prediction\". Explored real-world applications of AI, gaining insight into sustainable solutions through data-driven technologies."
+            },
+            {
+                id: 4,
+                title: "Building Modern Web Applications with MERN Stack",
+                company: "AICTE, EY Global Delivery Services & Edunet",
+                duration: "Mar - Apr 2025 (6 weeks)",
+                description: "Completed a 6-week internship as part of the Next-Generation Employability Program. Developed hands-on skills in MongoDB, Express.js, React.js, and Node.js to build modern scalable web applications. Gained insights into full-stack development and real-world deployment practices."
+            }
+        ];
+        localStorage.setItem('portfolioExperiences', JSON.stringify(defaultExperiences));
+    }
+}
+
 // Run on page load
 document.addEventListener('DOMContentLoaded', () => {
+    initializeDefaultExperiences();
     revealOnScroll();
     loadReviews();
+    loadExperiences();
     updateAdminUI();
 });
 
