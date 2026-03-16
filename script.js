@@ -268,7 +268,7 @@ function initializeDefaultExperiences() {
                 title: "AI and Data Analytics Virtual Internship",
                 company: "AICTE, Shell India & Edunet Foundation",
                 duration: "Feb - Mar 2025 (4 weeks)",
-                description: "Completed a 4-week internship focused on AI and Data Analytics with an emphasis on green skills in the project \"AQI prediction\". Explored real-world applications of AI, gaining insight into sustainable solutions through data-driven technologies."
+                description: "Completed a 4-week internship focused on AI and Data Analytics with an emphasis on green skills in the project \"AQI prediction\". Explored real-world applications of AI, gaining insights into sustainable solutions through data-driven technologies."
             },
             {
                 id: 4,
