@@ -130,6 +130,11 @@ a:hover {
     font-size: 0.9rem;
 }
 
+.hero .btn-resume {
+    color: var(--bg-white);
+    border-color: var(--bg-white);
+}
+
 /* Header */
 .site-header {
     background-color: var(--bg-white);
