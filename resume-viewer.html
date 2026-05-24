@@ -71,7 +71,7 @@
         .pdf-frame {
             width: 100%;
             max-width: 900px;
-            height: auto;
+            height: 800px;
             border: 1px solid #ddd;
             border-radius: 12px;
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
@@ -143,20 +143,31 @@
         </div>
 
         <div class="resume-viewer">
-            <iframe 
-                src="resume/Resume_Aryan_Raj (4).pdf" 
+            <object 
+                data="resume/Resume_Aryan_Raj (4).pdf" 
+                type="application/pdf"
                 class="pdf-frame"
                 title="Resume PDF Viewer"
-            ></iframe>
+            >
+                <div class="no-support">
+                    <h2>Unable to Display PDF</h2>
+                    <p>Your browser doesn't support inline PDF viewing.</p>
+                    <p>You can download it instead:</p>
+                    <a href="resume/Resume_Aryan_Raj (4).pdf" download>
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                </div>
+            </object>
         </div>
     </div>
 
     <script>
-        // Check if iframe loaded successfully
-        const iframe = document.querySelector('.pdf-frame');
+        // Fallback for browsers that don't support object tag
+        const pdfObject = document.querySelector('.pdf-frame');
         
-        iframe.addEventListener('error', () => {
-            iframe.outerHTML = `
+        // Check if PDF loaded (optional - most modern browsers support object tag for PDFs)
+        if (!pdfObject.data) {
+            pdfObject.outerHTML = `
                 <div class="no-support">
                     <h2>Unable to Display PDF</h2>
                     <p>Your browser doesn't support inline PDF viewing.</p>
@@ -166,7 +177,7 @@
                     </a>
                 </div>
             `;
-        });
+        }
     </script>
 </body>
 </html>
