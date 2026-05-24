@@ -4,6 +4,24 @@ const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-menu a');
 const navOverlay = document.querySelector('.nav-overlay');
 
+// Resume download handler
+document.addEventListener('DOMContentLoaded', () => {
+    const resumeLink = document.querySelector('.btn-resume');
+    if (resumeLink) {
+        resumeLink.addEventListener('click', (e) => {
+            const resumeData = localStorage.getItem('portfolioResume');
+            if (resumeData) {
+                const resume = JSON.parse(resumeData);
+                const link = document.createElement('a');
+                link.href = resume.data;
+                link.download = resume.name;
+                link.click();
+                e.preventDefault();
+            }
+        });
+    }
+});
+
 // Function to close menu
 function closeMenu() {
     if (navMenu) {
@@ -329,12 +347,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadReviews();
     loadExperiences();
     updateAdminUI();
-    
-    // Ensure reviews section is always visible to all users
-    const submittedReviews = document.getElementById('submittedReviews');
-    if (submittedReviews) {
-        submittedReviews.style.display = 'block';
-    }
 });
 
 // Clear all reviews functionality
@@ -356,12 +368,6 @@ function isAdmin() {
 
 // Show/hide admin features
 function updateAdminUI() {
-    // Always show reviews section to all users
-    const submittedReviews = document.getElementById('submittedReviews');
-    if (submittedReviews) {
-        submittedReviews.style.display = 'block';
-    }
-    
     if (isAdmin()) {
         clearReviewsBtn.style.display = 'inline-block';
         adminPanel.style.display = 'block';

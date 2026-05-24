@@ -274,6 +274,7 @@
             <button class="admin-tab active" onclick="switchTab('hero')">Hero</button>
             <button class="admin-tab" onclick="switchTab('about')">About</button>
             <button class="admin-tab" onclick="switchTab('skills')">Skills</button>
+            <button class="admin-tab" onclick="switchTab('resume')">Resume</button>
             <button class="admin-tab" onclick="switchTab('projects')">Projects</button>
             <button class="admin-tab" onclick="switchTab('experience')">Experience</button>
             <button class="admin-tab" onclick="switchTab('blog')">Blog</button>
@@ -315,6 +316,19 @@
                         <img id="aboutImagePreview" class="image-preview" style="display:none; max-width:200px; max-height:150px; margin-top:10px; border-radius:5px;">
                     </div>
                     <button class="btn-add" onclick="updateAbout()">Update About</button>
+                </div>
+            </div>
+
+            <!-- Resume Tab -->
+            <div id="resume" class="tab-content">
+                <div class="form-section">
+                    <h3>Manage Resume</h3>
+                    <div class="form-group">
+                        <label>Upload Resume PDF</label>
+                        <input type="file" id="resumeFile" accept=".pdf">
+                    </div>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 1rem;">Current Resume: <a id="currentResume" href="resume.pdf" target="_blank" style="color: var(--primary-color);">Download</a></p>
+                    <button class="btn-add" onclick="updateResume()" style="margin-top: 1rem;">Update Resume</button>
                 </div>
             </div>
 
@@ -499,6 +513,7 @@
             if (tabName === 'hero') loadHero();
             if (tabName === 'about') loadAbout();
             if (tabName === 'skills') loadSkills();
+            if (tabName === 'resume') loadResume();
             if (tabName === 'projects') loadProjects();
             if (tabName === 'blog') loadBlogs();
             if (tabName === 'certifications') loadCertifications();
@@ -631,6 +646,53 @@
                     </div>
                 </div>
             `).join('');
+        }
+
+        // ===== RESUME MANAGEMENT =====
+        function updateResume() {
+            const resumeFile = document.getElementById('resumeFile').files[0];
+            
+            if (!resumeFile) {
+                alert('Please select a PDF file');
+                return;
+            }
+
+            if (resumeFile.type !== 'application/pdf') {
+                alert('Please upload a valid PDF file');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const resumeData = {
+                    name: resumeFile.name,
+                    size: resumeFile.size,
+                    uploadDate: new Date().toISOString(),
+                    data: e.target.result
+                };
+                localStorage.setItem('portfolioResume', JSON.stringify(resumeData));
+                
+                // Create download link
+                const link = document.createElement('a');
+                link.href = e.target.result;
+                link.download = 'resume.pdf';
+                
+                alert('Resume updated successfully!');
+                loadResume();
+                document.getElementById('resumeFile').value = '';
+            };
+            reader.readAsDataURL(resumeFile);
+        }
+
+        function loadResume() {
+            const resumeData = JSON.parse(localStorage.getItem('portfolioResume'));
+            const currentResume = document.getElementById('currentResume');
+            
+            if (resumeData) {
+                currentResume.href = resumeData.data;
+                currentResume.textContent = 'Download (' + (resumeData.size / 1024).toFixed(2) + ' KB)';
+                currentResume.download = resumeData.name;
+            }
         }
 
         // ===== PROJECTS MANAGEMENT =====

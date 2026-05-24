@@ -111,6 +111,25 @@ a:hover {
     border-color: var(--bg-white);
 }
 
+.btn-resume {
+    background-color: var(--accent-color);
+    color: var(--bg-white);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-resume:hover {
+    background-color: #e15555;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-resume i {
+    font-size: 0.9rem;
+}
+
 /* Header */
 .site-header {
     background-color: var(--bg-white);
