@@ -4,23 +4,8 @@ const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-menu a');
 const navOverlay = document.querySelector('.nav-overlay');
 
-// Resume download handler
-document.addEventListener('DOMContentLoaded', () => {
-    const resumeLink = document.querySelector('.btn-resume');
-    if (resumeLink) {
-        resumeLink.addEventListener('click', (e) => {
-            const resumeData = localStorage.getItem('portfolioResume');
-            if (resumeData) {
-                const resume = JSON.parse(resumeData);
-                const link = document.createElement('a');
-                link.href = resume.data;
-                link.download = resume.name;
-                link.click();
-                e.preventDefault();
-            }
-        });
-    }
-});
+// Resume is now served directly from the resume folder
+// No localStorage handler needed
 
 // Function to close menu
 function closeMenu() {
