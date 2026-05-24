@@ -123,6 +123,7 @@ a:hover {
 
 .navbar {
     padding: 0;
+    position: relative;
 }
 
 .navbar .container {
@@ -192,6 +193,9 @@ a:hover {
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
+    background: none;
+    border: none;
+    padding: 6px;
 }
 
 .hamburger span {
@@ -1239,28 +1243,47 @@ a:hover {
 
     .hamburger {
         display: flex;
+        z-index: 101;
     }
 
     .nav-actions {
         margin-left: auto;
+        z-index: 101;
     }
 
     .nav-menu {
         display: none;
-    }
-
-    .nav-menu.active {
-        display: flex;
-        position: fixed;
+        position: absolute;
         flex-direction: column;
         background-color: var(--bg-white);
-        top: 60px;
+        top: 100%;
         left: 0;
         right: 0;
         padding: 1.5rem;
         gap: 1rem;
         box-shadow: var(--shadow-lg);
+        z-index: 100;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
         z-index: 99;
+    }
+
+    .nav-overlay.active {
+        display: block;
     }
 
     h1 {

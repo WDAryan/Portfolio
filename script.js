@@ -2,29 +2,69 @@
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-menu a');
+const navOverlay = document.querySelector('.nav-overlay');
 
-// Only add hamburger functionality for mobile
+// Function to close menu
+function closeMenu() {
+    if (navMenu) {
+        navMenu.classList.remove('active');
+    }
+    if (hamburger) {
+        hamburger.classList.remove('active');
+    }
+    if (navOverlay) {
+        navOverlay.classList.remove('active');
+    }
+}
+
+// Function to toggle menu
+function toggleMenu() {
+    const hamburgerDisplay = window.getComputedStyle(hamburger).display;
+    if (hamburgerDisplay !== 'none') {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+    }
+}
+
+// Hamburger click handler
 if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
-        // Only toggle if hamburger is visible (mobile only)
-        const hamburgerDisplay = window.getComputedStyle(hamburger).display;
-        if (hamburgerDisplay !== 'none') {
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        }
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
     });
 }
 
 // Close menu when a link is clicked
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        // Only close on mobile
-        const hamburgerDisplay = window.getComputedStyle(hamburger).display;
-        if (hamburgerDisplay !== 'none') {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
+        closeMenu();
     });
+});
+
+// Close menu when overlay is clicked
+if (navOverlay) {
+    navOverlay.addEventListener('click', () => {
+        closeMenu();
+    });
+}
+
+// Close menu when clicking outside (on body)
+document.addEventListener('click', (e) => {
+    const hamburgerDisplay = window.getComputedStyle(hamburger).display;
+    if (hamburgerDisplay !== 'none') {
+        if (!e.target.closest('.nav-menu') && !e.target.closest('.hamburger')) {
+            closeMenu();
+        }
+    }
+});
+
+// Close menu on window resize (when switching from mobile to desktop)
+window.addEventListener('resize', () => {
+    const hamburgerDisplay = window.getComputedStyle(hamburger).display;
+    if (hamburgerDisplay === 'none') {
+        closeMenu();
+    }
 });
 
 // Smooth scroll for anchor links
@@ -301,7 +341,7 @@ const cancelLoginBtn = document.querySelector('#cancelLoginBtn');
 const adminLogoutBtn = document.querySelector('#adminLogoutBtn');
 
 // Admin password (change this to your own password)
-const ADMIN_PASSWORD = 'admin@2024';
+const ADMIN_PASSWORD = '1234';
 
 // Check if user is admin
 function isAdmin() {
